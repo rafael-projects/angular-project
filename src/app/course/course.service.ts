@@ -5,11 +5,11 @@ import { Course } from "./Course";
 @Injectable({
     providedIn: 'root'
 })
-export class CourseService{
+export class CourseService {
 
 
 
-    retriveAll(): Course[]  {
+    retriveAll(): Course[] {
         return COURSES;
     }
 
