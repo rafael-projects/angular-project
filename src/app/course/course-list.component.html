@@ -18,6 +18,7 @@
                 <th>Duration</th>
                 <th>Release Data</th>
                 <th>Ratio</th>
+                <th>Options</th>
             </tr>
     </thead>
     <tbody>
@@ -32,7 +33,12 @@
             <td>
                 <app-star [rating]="course.rating"></app-star>
             </td>
-            <td></td>
+            <td>{{course.option}}</td>
+            <td>
+                    <a [routerLink]="['/courses/info', course.id]" class="btn btn-primary">Edit</a>
+                    <button (click)="deletedById(course.id)" class="btn btn-danger mr-2">Delete</button>
+            </td>
+
         </tr>
     </tbody>
 </table>

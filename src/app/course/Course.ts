@@ -10,6 +10,7 @@ export class Course{
         this.rating = 0;    
         this.releaseDate = '';
         this.description = '';
+        this.option = '';
     }
     id:number;
     name: string;
@@ -20,4 +21,5 @@ export class Course{
     rating: number;
     releaseDate: string;
     description: string;
+    option: string;
 }

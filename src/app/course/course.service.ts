@@ -1,18 +1,37 @@
 import { Injectable } from "@angular/core";
 import { Course } from "./Course";
+import { HttpClient} from "@angular/common/http"
+import { Observable } from "rxjs";
 
 
 @Injectable({
     providedIn: 'root'
-})
+    })
 export class CourseService {
 
+    private courseUrl: string = 'http://localhost:3100/api/courses' 
 
+    constructor(private httpClient: HttpClient) {}
 
-    retriveAll(): Course[] {
-        return COURSES;
+    retriveAll(): Observable<Course[]> {
+        return this.httpClient.get<Course[]>(this.courseUrl);
     }
 
+    retriveByID(id: number): Observable<Course>{
+        return this.httpClient.get<Course>(`${this.courseUrl}/${id}`);
+    }
+
+    save(course: Course ): Observable<Course> {
+        if(course.id){
+                return this.httpClient.put<Course>(`${this.courseUrl}/${course.id}`,course);
+        }else{
+            return this.httpClient.put<Course>(`${this.courseUrl}`,course);
+
+        }
+    }
+    deletedById(id: number): Observable<any>{
+        return this.httpClient.delete<any>(`${this.courseUrl}/ ${id}`);
+    }
 
 }
 
@@ -28,6 +47,7 @@ var COURSES: Course[] = [
         rating: 3,
         price: 12.99,
         imageUrl: '/assets/images/cli.png',
+        option: 'a'
     },
     {
         id: 2,
@@ -39,6 +59,7 @@ var COURSES: Course[] = [
         rating: 3.5,
         price: 24.99,
         imageUrl: '/assets/images/forms.png',
+        option: 'a'
     },
     {
         id: 3,
@@ -50,6 +71,7 @@ var COURSES: Course[] = [
         rating: 4.0,
         price: 36.99,
         imageUrl: '/assets/images/http.png',
+        option: 'a'
     },
     {
         id: 4,
@@ -61,6 +83,7 @@ var COURSES: Course[] = [
         rating: 4.5,
         price: 46.99,
         imageUrl: '/assets/images/router.png',
+        option: 'a'
     },
     {
         id: 5,
@@ -72,5 +95,6 @@ var COURSES: Course[] = [
         rating: 5,
         price: 56.99,
         imageUrl: '/assets/images/animations.png',
+        option: 'a'
     }
 ];
